@@ -10,7 +10,7 @@ import CoreLocation
 import MapKit
 
 
-class ViewController: UIViewController, CLLocationManagerDelegate {
+class ViewController: UIViewController {
     
     let manager: CLLocationManager = CLLocationManager()
     @IBOutlet weak var mapView: MKMapView!
@@ -37,15 +37,7 @@ class ViewController: UIViewController, CLLocationManagerDelegate {
         manager.startUpdatingLocation()
     }
     
-    func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
-        guard let first = locations.first else { return }
-        
-        label.text = "\(first.coordinate.longitude) | \(first.coordinate.latitude)"
-        
-        manager.stopUpdatingLocation()
-        
-        render(first)
-    }
+
     
     func render (_ location: CLLocation){
         let coordinate = CLLocationCoordinate2DMake(location.coordinate.latitude, location.coordinate.longitude)
@@ -58,5 +50,17 @@ class ViewController: UIViewController, CLLocationManagerDelegate {
     }
     
     
+}
+
+extension ViewController: CLLocationManagerDelegate {
+    func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
+        guard let first = locations.first else { return }
+        
+        label.text = "\(first.coordinate.longitude) | \(first.coordinate.latitude)"
+        
+        manager.stopUpdatingLocation()
+        
+        render(first)
+    }
 }
 
