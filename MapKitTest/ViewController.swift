@@ -17,6 +17,7 @@ class ViewController: UIViewController {
     
     
     let mapDelta: Double = 0.1
+    let regionInMetters: Double = 10000
 
 
     
@@ -26,6 +27,7 @@ class ViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         label.text = "Ready!"
+        checkLocationServices()
     }
     
     override func viewDidAppear(_ animated: Bool) {
